@@ -1,5 +1,4 @@
 // store-rating-app/Database.js
-// Minor update: harmless comment to trigger Git commit
 
 const { Sequelize } = require("sequelize"); // import Sequelize
 const fs = require("fs");
