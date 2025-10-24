@@ -8,8 +8,10 @@ const SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 exports.createUser = async (req, res) => {
   try {
     const { name, email, address, password, role } = req.body;
+    console.log(req.body)
     const password_hash = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, address, password_hash, role });
+        console.log("User created:", user.toJSON());
     res.status(201).json({ message: 'User registered', user });
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -17,6 +19,36 @@ exports.createUser = async (req, res) => {
 };
 
 
+// exports.login = async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+//     const user = await User.findOne({ where: { email } });
+//     if (!user) return res.status(401).json({ error: 'Invalid email' });
+
+//     const valid = await bcrypt.compare(password, user.password_hash);
+//     if (!valid) return res.status(401).json({ error: 'Invalid password' });
+
+  
+//     const token = jwt.sign(
+//       { id: user.id, role: user.role, name: user.name },
+//       SECRET,
+//       { expiresIn: '1h' }
+//     );
+
+//     res.json({
+//       message: 'Login successful',
+//       token,
+//       user: {
+//         id: user.id,
+//         name: user.name,
+//         role: user.role,
+//         email: user.email
+//       }
+//     });
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// };
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -26,7 +58,6 @@ exports.login = async (req, res) => {
     const valid = await bcrypt.compare(password, user.password_hash);
     if (!valid) return res.status(401).json({ error: 'Invalid password' });
 
-  
     const token = jwt.sign(
       { id: user.id, role: user.role, name: user.name },
       SECRET,
@@ -40,8 +71,10 @@ exports.login = async (req, res) => {
         id: user.id,
         name: user.name,
         role: user.role,
-        email: user.email
-      }
+        email: user.email,
+      },
+      // 👇 THIS LINE FIXES YOUR FRONTEND ERROR
+      role: user.role,
     });
   } catch (err) {
     res.status(500).json({ error: err.message });

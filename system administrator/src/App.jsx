@@ -1,15 +1,13 @@
-import React from "react";
-import DrawerRouting from "./components/DrawerRouting";
+import React from 'react'
+import UnifiedRouting from './components/route/UnifiedRouting'
 
-
-function App() {
+const App = () => {
   return (
     <div>
-      
-      {/* <h1 style={{ textAlign: "center" }}>User Data</h1> */}
-      <DrawerRouting/>
-    </div>
-  );
-} 
+   <UnifiedRouting/>
 
-export default App;
+    </div>
+  )
+}
+
+export default App
