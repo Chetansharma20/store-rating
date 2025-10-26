@@ -35,7 +35,10 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin: "https://store-rating-z8vd.vercel.app",
+  origin: ["https://store-rating-z8vd.vercel.app", 
+    "https://store-rating-z8vd-git-master-chetansharma20s-projects.vercel.app",
+    "https://store-rating-z8vd-iw5vabpbs-chetansharma20s-projects.vercel.app"
+  ],
   methods: ["GET","POST","PUT","DELETE","OPTIONS"],
   allowedHeaders: ["Content-Type","Authorization"],
   credentials: true
