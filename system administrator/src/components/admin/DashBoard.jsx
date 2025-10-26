@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Box, Card, CardContent, Typography, Grid } from '@mui/material';
+import api from '../config/axiosconfig';
 
 const DashBoard = () => {
   const [stats, setStats] = useState({
@@ -12,7 +13,7 @@ const DashBoard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/api/admindashboard');
+        const res = await api.get('/api/admindashboard');
         setStats(res.data);
       } catch (error) {
         console.error('Error fetching dashboard data:', error);

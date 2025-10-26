@@ -14,7 +14,7 @@ const AdminDashBoard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await api.get("http://localhost:3000/api/admindashboard");
+        const res = await api.get("/api/admindashboard");
         setStats(res.data);
       } catch (error) {
         console.error("Error fetching dashboard data:", error);

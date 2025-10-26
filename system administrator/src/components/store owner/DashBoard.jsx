@@ -15,6 +15,7 @@ import {
 import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
+import api from "../config/axiosconfig";
 
 const DashBoard = () => {
   const [stores, setStores] = useState([]);
@@ -36,7 +37,7 @@ const DashBoard = () => {
   useEffect(() => {
     const fetchStores = async () => {
       try {
-        const response = await axios.post("http://localhost:3000/api/getratingsforstore", {
+        const response = await api.post('/api/getratingsforstore', {
           owner_id: StoreOwner?.id
         });
 
